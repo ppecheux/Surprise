@@ -37,7 +37,7 @@ def baseline_als(self):
     cdef double reg_u = self.bsl_options.get('reg_u', 15)
     cdef double reg_i = self.bsl_options.get('reg_i', 10)
 
-    for dummy in range(n_epochs):
+    for _ in range(n_epochs):
         for i in self.trainset.all_items():
             dev_i = 0
             for (u, r) in self.trainset.ir[i]:
@@ -75,7 +75,7 @@ def baseline_sgd(self):
     cdef double reg = self.bsl_options.get('reg', 0.02)
     cdef double lr = self.bsl_options.get('learning_rate', 0.005)
 
-    for dummy in range(n_epochs):
+    for _ in range(n_epochs):
         for u, i, r in self.trainset.all_ratings():
             err = (r - (global_mean + bu[u] + bi[i]))
             bu[u] += lr * (err - reg * bu[u])
